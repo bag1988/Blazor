@@ -1,0 +1,85 @@
+﻿@page "/"
+@inject IJSRuntime js
+@inject HttpClient Http
+@inject Microsoft.Extensions.Configuration.IConfiguration config
+
+<PageTitle>Сообщения</PageTitle>
+
+ @if (models==null)
+{
+    <p><em>Нет данных!</em></p>
+}
+else
+{
+    <table class="table @Sort?.Style table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="w-50">Сообщение</th>
+                <th class="w-25">Аудио</th>
+                <th class="w-25">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (MessageModel m in models)
+            {
+                <tr>
+
+                    <td>@m.Message</td>
+                    <td>
+                        <audio controls="controls">
+                            <source src="@(config["ServerUrl"]+"/wav/"+m.UrlFile)" type="audio/wav">
+                            Ваш браузер не поддерживает элемент
+                            <code>audio</code>.
+                        </audio>
+                    </td>
+                    <td>
+                        @if (IsDelete != m.Id)
+                        {
+                            <div>
+                                <NavLink class="btn btn-link" href=@($"savemessage/{m.Id}")>
+                                    <span class="oi oi-pencil" aria-hidden="true"></span> Редактировать
+                                </NavLink>
+                                <button class="btn btn-danger" @onclick="(()=>IsDelete=m.Id)"><span class="oi oi-delete" aria-hidden="true"></span> Удалить</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" @onclick="()=>DeleteMessage(new Param{Id=m.Id})"><span class="oi oi-delete" aria-hidden="true"></span> Подтвержадаю удаление</button>
+                            <button class="btn btn-info" @onclick="(()=>IsDelete=0)">Отмена</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+
+    [CascadingParameter]
+    public Param? Sort { get; set; }
+
+    private int IsDelete { get; set; }
+
+    private MessageModel[]? models;
+
+    protected override async Task OnInitializedAsync()
+    {       
+        await Http.PostAsJsonAsync<Param?>("GetAllMesages", Sort).ContinueWith(async x => {models = await x.Result.Content.ReadFromJsonAsync<MessageModel[]>();});
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await OnInitializedAsync();
+    }
+
+    protected async Task DeleteMessage(Param id)
+    {
+        await Http.PostAsJsonAsync<Param?>("DeleteMessage", id);
+        await OnInitializedAsync();
+    }
+
+    
+}
