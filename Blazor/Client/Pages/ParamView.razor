@@ -9,11 +9,11 @@
         <span class="oi oi-plus" aria-hidden="true"></span> Добавить сообщение
     </NavLink>
 
-    <div class="mb-3">
+    @*<div class="mb-3">
         <label for="Message" class="col-form-label">Ip сервера</label>
         <input type="text" class="form-control" id="IpServer" @bind="IpServer" />
     </div>
-    <button class="btn btn-info" type="button" @onclick="()=>SaveIp()">Сохранить IP</button>
+    <button class="btn btn-info" type="button" @onclick="()=>SaveIp()">Сохранить IP</button>*@
 
      <div class="mb-3">
         <label for="Message" class="col-form-label">Адрес Базы</label>
@@ -37,7 +37,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Http.GetAsync("GetIpServer").ContinueWith(async x => { IpServer = await x.Result.Content.ReadAsStringAsync(); });
+        //await Http.GetAsync("GetIpServer").ContinueWith(async x => { IpServer = await x.Result.Content.ReadAsStringAsync(); });
         await Http.GetAsync("GetIpBase").ContinueWith(async x => { IpBase = await x.Result.Content.ReadAsStringAsync(); });
     }
 

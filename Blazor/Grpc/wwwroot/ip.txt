@@ -1,1 +1,0 @@
-Server=db;Database=MessageBase;User Id=sa;Password=Your_password123;

@@ -2,21 +2,19 @@ version: '3.4'
 
 services:
   blazor.server:
+    container_name: "front"
     image: ${DOCKER_REGISTRY-}blazorserver
     build:
       context: .
       dockerfile: Blazor/Server/Dockerfile
-    depends_on:
-      - blazor.grpc
   blazor.grpc:
+    container_name: "back"
     image: ${DOCKER_REGISTRY-}blazorgrpc
     stdin_open: true
     tty: true
     build:
       context: .
       dockerfile: Blazor/Grpc/Dockerfile
-    depends_on:
-      - db
   db:
     image: "mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04"    
     container_name: "db"
