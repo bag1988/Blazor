@@ -18,7 +18,6 @@ namespace BlazorApp.Grpc.Data
             {
                 Console.WriteLine(ex.ToString());
             }
-            
         }
 
         public DbSet<MessageModel> Messages {get; set;}

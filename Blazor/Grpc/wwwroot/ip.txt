@@ -1,1 +1,1 @@
-Server=PRO\PROGRAMMIST;Database=helloappdb;Trusted_Connection=True;
+Server=db;Database=MessageBase;User Id=sa;Password=Your_password123;

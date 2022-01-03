@@ -43,9 +43,10 @@
 
     private async Task SaveIp()
     {
-        if (Regex.IsMatch(IpServer!, @"^http(s){0,1}://(\w)*:(\d){4}$"))
+        if (Regex.IsMatch(IpServer!, @"^http(s)?://(\w\.*)+:(\d){2,5}$"))
         {
             await Http.GetAsync("SaveIpServer/?ip=" + IpServer);
+            await OnInitializedAsync();
             NavigationManager.NavigateTo("/");
         }
         else

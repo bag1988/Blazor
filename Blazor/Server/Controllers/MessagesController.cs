@@ -71,7 +71,7 @@ namespace Blazor.Server.Controllers
         [Route("SaveIpServer")]
         public async Task SaveIpServer(string ip)
         {
-            if (Regex.IsMatch(ip, @"^http(s){0,1}://(\w)*:(\d){4}$"))
+            if (Regex.IsMatch(ip, @"^http(s)?://(\w\.*)+:(\d){2,5}$"))
             {
 
                 if (!Directory.Exists("wwwroot"))

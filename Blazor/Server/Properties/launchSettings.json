@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:53243",
-      "sslPort": 44380
+      "applicationUrl": "https://localhost:5071",
+      "sslPort": 5071
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "applicationUrl": "https://localhost:7242;http://localhost:5242",
+      "applicationUrl": "https://localhost:5071",
       "dotnetRunMessages": true
     },
     "IIS Express": {
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "launchUrl": "https://localhost:5071",
       "publishAllPorts": true,
       "useSSL": true
     }

@@ -1,0 +1,39 @@
+﻿version: '3.4'
+
+services:
+  blazor:
+    image: blazor
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - "5071:443" 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=12345678
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
+    volumes:
+      - server\.aspnet\https:C:\https:ro
+  grpc:
+    image: grpc
+    build:
+      context: .
+      dockerfile: Dockerfile.grpc
+    ports:
+      - "7017:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=123456789
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
+    volumes:
+      - grpc\.aspnet\https:C:\https:ro
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04"
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"

@@ -10,7 +10,7 @@
     },
     "Docker": {
       "commandName": "Docker",
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "launchUrl": "https://localhost:7017",
       "publishAllPorts": true,
       "useSSL": true
     }

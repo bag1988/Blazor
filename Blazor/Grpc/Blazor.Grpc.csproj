@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>   
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>a3fc1a59-dc26-45e5-8581-ff1b2567d7b6</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
+    <ImplicitUsings>enable</ImplicitUsings>   
+    <UserSecretsId>f1909d39-34a8-4bc7-afb3-2de42b003915</UserSecretsId>   
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>   
+    <DockerfileContext>..\..</DockerfileContext>   
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 	
   <ItemGroup>

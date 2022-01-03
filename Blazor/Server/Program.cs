@@ -1,3 +1,5 @@
+
+using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -21,15 +23,18 @@ builder.Services.AddScoped(sp =>
         serverUrl = System.IO.File.ReadAllText("wwwroot/ip.txt");
     }
 
+    HttpClientHandler clientHandler = new HttpClientHandler();
+    clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
     var channel = GrpcChannel.ForAddress(serverUrl, new GrpcChannelOptions
     {
-        HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler())
+        HttpHandler = clientHandler
     });
-
+    
     var client = new MessageContext.MessageContextClient(channel);
-
     return client;
 });
+
 
 var app = builder.Build();
 
