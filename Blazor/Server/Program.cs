@@ -18,10 +18,10 @@ builder.Services.AddScoped(sp =>
 
     string serverUrl;
     serverUrl = config["ServerUrl"];
-    if (Directory.Exists("wwwroot") && System.IO.File.Exists("wwwroot/ip.txt"))
-    {
-        serverUrl = System.IO.File.ReadAllText("wwwroot/ip.txt");
-    }
+    //if (Directory.Exists("wwwroot") && System.IO.File.Exists("wwwroot/ip.txt"))
+    //{
+    //    serverUrl = System.IO.File.ReadAllText("wwwroot/ip.txt");
+    //}
 
     HttpClientHandler clientHandler = new HttpClientHandler();
     clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };

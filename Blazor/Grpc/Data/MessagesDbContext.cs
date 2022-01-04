@@ -25,11 +25,7 @@ namespace BlazorApp.Grpc.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string serverUrl;
-            serverUrl = _config.GetConnectionString("MessageConnection");
-            if (Directory.Exists("wwwroot") && System.IO.File.Exists("wwwroot/ip.txt"))
-            {
-                serverUrl = System.IO.File.ReadAllText("wwwroot/ip.txt");
-            }
+            serverUrl = _config.GetConnectionString("MessageConnection");            
 
             optionsBuilder.UseSqlServer(serverUrl);
         }

@@ -26,8 +26,5 @@
 	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
 	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
   </ItemGroup>
-	<ItemGroup>
-		<Folder Include="wwwroot\wav\" />
-	</ItemGroup>
 	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

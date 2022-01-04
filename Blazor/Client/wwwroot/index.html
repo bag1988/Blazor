@@ -36,7 +36,7 @@
             if (navigator.getUserMedia) {
                 console.log('getUserMedia supported.');
                 var constraints = { audio: true };
-
+                
                 var onSuccess = function (stream) {
                     mediaRecorder = new MediaRecorder(stream);
                     mediaRecorder.start();
@@ -53,8 +53,8 @@
         };
 
         window.StopRecord = () => {
-            if (mediaRecorder)
-                return new Promise((resolve, reject) => {
+            if (mediaRecorder) {
+                return new Promise((resolve, reject) => {                    
                     mediaRecorder.stop();
                     mediaRecorder.ondataavailable = (e) => resolve(e.data);
                 }).then(d => {
@@ -64,6 +64,7 @@
                         fileReader.readAsDataURL(d);
                     });
                 });
+            }
         };
 
         window.ViewDiv = (id) => {

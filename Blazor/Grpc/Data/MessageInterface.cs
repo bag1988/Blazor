@@ -11,7 +11,5 @@ namespace BlazorApp.Grpc.Data
         public Task<Param> SaveMessage(MessageModel mes);
 
         public Task<Param> DeleteMessage(Param param);
-
-        public Task<IpBase> IpBaseGetSet(IpBase ipBase);
     }
 }

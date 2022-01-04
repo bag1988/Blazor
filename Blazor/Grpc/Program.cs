@@ -5,10 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(7443, ListenOptions => ListenOptions.Protocols = HttpProtocols.Http2));
-
-
-
 builder.Services.AddDbContext<MessagesDbContext>();
 
 builder.Services.AddScoped<IMessageInterface, MessageRelease>();

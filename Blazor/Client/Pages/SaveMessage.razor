@@ -25,11 +25,11 @@ else
         <InputTextArea class="form-control" id="Message" @bind-Value="model!.Message" />
     </div>
     <div class="mb-3">
-        @if (!string.IsNullOrEmpty(model?.UrlFile) || !string.IsNullOrEmpty(blob))
+        @if (!string.IsNullOrEmpty(blob))
         {
 
             <audio class="w-100" controls="controls">
-                <source src="@(string.IsNullOrEmpty(blob)?(config["ServerUrl"]+"/wav/"+model?.UrlFile):blob)" type="audio/wav">
+                <source  src="@blob" type="audio/wav">
                 Ваш браузер не поддерживает элемент
                 <code>audio</code>.
             </audio>
@@ -61,16 +61,12 @@ else
         {
             await Http.PostAsJsonAsync<Param>("GetMessage", new Param { Id = IdMessage.Value }).ContinueWith(async x => { model =await x.Result.Content.ReadFromJsonAsync<MessageModel>(); });
         }
-
+        blob = model?.UrlFile;
     }
 
     private async Task SaveMessages()
     {
-        Param? p = new Param();
-        await Http.PostAsJsonAsync<MessageModel?>("SaveMessages", model).ContinueWith(async x => { p = await x.Result.Content.ReadFromJsonAsync<Param?>(); });
-
-        if (!string.IsNullOrEmpty(blob))
-            await Http.PostAsJsonAsync<(int, string)>("SaveFile", (p.Id, blob.Split(",")[1]));
+        await Http.PostAsJsonAsync<MessageModel?>("SaveMessages", model);
 
         NavigationManager.NavigateTo("/");
     }
@@ -78,14 +74,14 @@ else
     protected async Task StartRecord()
     {
         records = false;
+        blob = null;
         await js.InvokeVoidAsync("StartRecord");
     }
 
     protected async Task StopRecord()
     {
         records = true;
-        blob = await js.InvokeAsync<string>("StopRecord");
-        StateHasChanged();
+        blob = model!.UrlFile = await js.InvokeAsync<string>("StopRecord");
     }
 
 }

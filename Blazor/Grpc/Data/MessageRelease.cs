@@ -56,25 +56,6 @@ namespace BlazorApp.Grpc.Data
             return id;
         }
 
-        public async Task<IpBase> IpBaseGetSet(IpBase ip)
-        {
-            if (!string.IsNullOrEmpty(ip.Ip))
-            {
-                if (!Directory.Exists("wwwroot"))
-                    Directory.CreateDirectory("wwwroot");
-                if (System.IO.File.Exists("wwwroot/ip.txt"))
-                    System.IO.File.Delete("wwwroot/ip.txt");
-                await System.IO.File.WriteAllTextAsync("wwwroot/ip.txt", ip.Ip);
-            }
-
-            if (Directory.Exists("wwwroot") && System.IO.File.Exists("wwwroot/ip.txt"))
-                return new IpBase { Ip = await System.IO.File.ReadAllTextAsync("wwwroot/ip.txt") };
-
-            
-
-            return new IpBase { Ip = _config.GetConnectionString("MessageConnection") };
-        }
-
         public void Dispose()
         {
             Dispose(true);

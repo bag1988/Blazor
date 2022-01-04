@@ -9,18 +9,11 @@ service MessageContext{
 	rpc GetMessag(Param) returns (MessageModel);
 	rpc SaveMesage (MessageModel) returns (Param);
 	rpc GetMessages(Param) returns (Messages);
-	rpc SaveFile(FileBase) returns (Empty);
 	rpc Delete(Param) returns (Param);
-	rpc IpBaseGetSet(IpBase) returns (IpBase);
 }
 
 message Empty{
 
-}
-
-message FileBase{
-	string file=1;
-	int32 id=2;
 }
 
 message Param{
@@ -30,10 +23,6 @@ message Param{
 	string style=4;
 }
 
-message IpBase
-{
-	string ip=1;
-}
 
 message MessageModel{
 	int32 id=1;

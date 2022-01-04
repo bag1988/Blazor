@@ -29,12 +29,7 @@ namespace BlazorApp.Grpc.Services
         public override async Task<Param> SaveMesage(MessageModel mes, ServerCallContext context)
         {
             var param = await _ImessageInterface.SaveMessage(mes);
-
-            if (string.IsNullOrEmpty(mes.UrlFile))
-            {                
-                mes.UrlFile = $"{param.Id}.webm";
-                await _ImessageInterface.SaveMessage(mes);
-            }
+           
             return param;
         }
 
@@ -42,30 +37,6 @@ namespace BlazorApp.Grpc.Services
         {
             return await _ImessageInterface.DeleteMessage(param);
         }
-
-        public override async Task<Empty> SaveFile(FileBase audioBase, ServerCallContext context)
-        {
-            try
-            {               
-                if (!Directory.Exists("wwwroot/wav"))
-                    Directory.CreateDirectory("wwwroot/wav");
-
-                if (File.Exists($"wwwroot/wav/{audioBase.Id}.webm"))
-                    File.Delete($"wwwroot/wav/{audioBase.Id}.webm");
-
-                await File.WriteAllBytesAsync($"wwwroot/wav/{audioBase.Id}.webm", Convert.FromBase64String(audioBase.File));
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return new Empty();
-        }
-
-        public override async Task<IpBase> IpBaseGetSet(IpBase ip, ServerCallContext context)
-        {
-            return await _ImessageInterface.IpBaseGetSet(ip);
-        }
+       
     }
 }

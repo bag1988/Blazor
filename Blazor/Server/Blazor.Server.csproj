@@ -27,9 +27,5 @@
     <ProjectReference Include="..\Client\Blazor.Client.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 
 </Project>

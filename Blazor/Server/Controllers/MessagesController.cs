@@ -43,57 +43,7 @@ namespace Blazor.Server.Controllers
         {
             return await _m.SaveMesageAsync(model);   
         }
-        [HttpPost]
-        [Route("SaveFile")]
-        public async Task SaveFile(MessageModel model)
-        {
-            if (!string.IsNullOrEmpty(model.UrlFile))
-                await _m.SaveFileAsync(new FileBase { File = model.UrlFile?.Split(",")[1], Id = model.Id });
-        }
-
-        [HttpPost]
-        [Route("SaveIpBase")]
-        public async Task SaveIpBase(IpBase ip)
-        {
-            await _m.IpBaseGetSetAsync(ip );
-        }
-
-        [HttpGet]
-        [Route("GetIpBase")]
-        public async Task<string> GetIpBase()
-        {
-            var ip = await _m.IpBaseGetSetAsync(new IpBase());
-            return ip.Ip;
-        }
-
-
-        [HttpGet]
-        [Route("SaveIpServer")]
-        public async Task SaveIpServer(string ip)
-        {
-            if (Regex.IsMatch(ip, @"^http(s)?://(\w\.*)+:(\d){2,5}$"))
-            {
-
-                if (!Directory.Exists("wwwroot"))
-                    Directory.CreateDirectory("wwwroot");
-                if (System.IO.File.Exists("wwwroot/ip.txt"))
-                    System.IO.File.Delete("wwwroot/ip.txt");
-
-                await System.IO.File.WriteAllTextAsync("wwwroot/ip.txt", ip);
-            }           
-
-        }
-        [HttpGet]
-        [Route("GetIpServer")]
-        public async Task<string> GetIpServer()
-        {
-            if (Directory.Exists("wwwroot") && System.IO.File.Exists("wwwroot/ip.txt"))            
-                return await System.IO.File.ReadAllTextAsync("wwwroot/ip.txt");
-
-
-            return _config["ServerUrl"];
-
-        }
+        
 
     }
 }

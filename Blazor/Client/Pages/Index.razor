@@ -27,7 +27,7 @@ else
                     <td>@m.Message</td>
                     <td>
                         <audio controls="controls">
-                            <source src="@(config["ServerUrl"]+"/wav/"+m.UrlFile)" type="audio/wav">
+                            <source src="@m.UrlFile" type="audio/wav">
                             Ваш браузер не поддерживает элемент
                             <code>audio</code>.
                         </audio>
