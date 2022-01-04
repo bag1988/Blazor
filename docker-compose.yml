@@ -9,9 +9,7 @@ services:
       dockerfile: Blazor/Server/Dockerfile
   blazor.grpc:
     container_name: "back"
-    image: ${DOCKER_REGISTRY-}blazorgrpc
-    stdin_open: true
-    tty: true
+    image: ${DOCKER_REGISTRY-}blazorgrpc    
     build:
       context: .
       dockerfile: Blazor/Grpc/Dockerfile
